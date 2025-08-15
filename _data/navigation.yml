@@ -15,6 +15,9 @@ main:
   - title: "Services"
     url: "/#services"
 
+  - title: "CV"
+    url: "./cv/xxy_CV.pdf"
+
   - title: "Misc."
     url: "/#miscellaneous"
     
