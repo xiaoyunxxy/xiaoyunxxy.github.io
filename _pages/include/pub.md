@@ -1,5 +1,20 @@
 # Publications 
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NDSS 2026</div><img src='images/mimir.png' alt="sym" width="75%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[MIMIR: Masked Image Modeling for Mutual Information-based Adversarial Robustness](https://arxiv.org/abs/2312.04960)
+
+**Xiaoyun Xu**, Shujian Yu, Zhuoran Liu, Stjepan Picek
+
+Network and Distributed System Security (NDSS) Symposium, 2026
+
+[**Code**](https://github.com/xiaoyunxxy/MIMIR) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
+[**arXiv**](https://arxiv.org/abs/2312.04960) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
+</div>
+</div>
+
+
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS 2025</div><img src='images/weights_change.jpg' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -29,20 +44,6 @@ Advances in Neural Information Processing Systems (NeurIPS), 2024
 </div>
 </div>
 
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">arXiv</div><img src='images/mimir.png' alt="sym" width="75%"></div></div>
-<div class='paper-box-text' markdown="1">
-
-[MIMIR: Masked Image Modeling for Mutual Information-based Adversarial Robustness](https://arxiv.org/abs/2312.04960)
-
-**Xiaoyun Xu**, Shujian Yu, Zhuoran Liu, Stjepan Picek
-
-Under review
-
-[**Code**](https://github.com/xiaoyunxxy/MIMIR) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
-[**arXiv**](https://arxiv.org/abs/2312.04960) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
-</div>
-</div>
 
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">DSN 2024</div><img src='images/usb.png' alt="sym" width="75%"></div></div>
