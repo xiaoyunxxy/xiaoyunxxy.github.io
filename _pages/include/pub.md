@@ -11,6 +11,8 @@ Network and Distributed System Security (NDSS) Symposium, 2026
 
 [**Code**](https://github.com/xiaoyunxxy/MIMIR) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
 [**arXiv**](https://arxiv.org/abs/2312.04960) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
+
+<div class="ae-badge"><img src='ae_badge/NDSS/ndssbadges_available.png' alt="AE Available"><img src='ae_badge/NDSS/ndssbadges_functional.png' alt="AE Functional"><img src='ae_badge/NDSS/ndssbadges_reproduced.png' alt="AE Reproduced"></div>
 </div>
 </div>
 
@@ -26,6 +28,8 @@ ACM Conference on Computer and Communications Security (CCS), 2025
 
 [**Code**](https://github.com/xiaoyunxxy/parameter_backdoor) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
 [**arXiv**](https://arxiv.org/abs/2501.05928) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
+
+<div class="ae-badge"><img src='ae_badge/CCS/icon-small_202009300323.webp' alt="AE Available"><img src='ae_badge/CCS/icon-small_202009300323-1.webp' alt="AE Functional"><img src='ae_badge/CCS/icon-small_202009300324.webp' alt="AE Reproduced"></div>
 </div>
 </div>
 
