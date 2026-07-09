@@ -23,12 +23,12 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Xiaoyun Xu"
   avatar           : "images/xxy_photo.png"
-  bio              : "PhD student at Radboud University Nijmegen"
-  location         : "Nijmegen, The Netherlands"
+  bio              : "Assistant Professor at Zhongguancun Academy"
+  location         : "Beijing"
   employer         :
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=vPA0GgUAAAAJ&hl=en"
-  email            : "xiaoyun.xu@ru.nl"
+  email            : "xuxiaoyun@bza.edu.cn"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
