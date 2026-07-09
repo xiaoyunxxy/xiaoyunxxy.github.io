@@ -4,9 +4,9 @@
 - *2013 - 2017*, Undergraduate, University of Electronic Science and Technology of China (UESTC)
 
 # Services
-- Reviewer/PC: BMVC, ICLR, NeurIPS, SaTML
+- Reviewer/PC: USENIX Security, CCS, BMVC, ICLR, NeurIPS, SaTML
 
-- External Reviewer: IEEE SP, NDSS, USENIX Security
+- External Reviewer: IEEE SP, NDSS
 
 # Miscellaneous
 
