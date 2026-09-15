@@ -1,0 +1,71 @@
+#town { display: none; }
+.town-ready #town { display: block; }
+.town-ready .town-source { display: none; }
+.town-nav { min-height: 40px; }
+.town-nav > button, .town-nav .hidden-links { display: none; }
+.town-nav .visible-links { display: flex; justify-content: flex-end; gap: 24px; margin: 0; }
+.town-nav .visible-links li { display: block; }
+.town-nav .visible-links a { margin: 0; }
+.town-header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 34px 0 4px; padding-top: 24px; border-top: 1px solid #e0e4e9; }
+.town-header h2 { font: bold 24px/1.3 Georgia,serif; color: #293c50; margin: 0; }
+.town-coordinate { font: 500 10px/1.6 system-ui,sans-serif; color: #7a8b9b; white-space: nowrap; }
+.town-viewport { overflow-x: auto; scrollbar-width: thin; scrollbar-color: #b3c8d9 #f4f7fa; }
+/* Trim the scene's empty sky without changing building positions within the map. */
+#town-map { position: relative; isolation: isolate; width: 100%; min-width: 740px; aspect-ratio: 1200/800; margin: -40px auto 0; }
+.town-ground { width: 100%; height: 100%; display: block; }
+.town-building { position: absolute; width: 17.5%; height: 28%; padding: 0; border: 0; background: none; cursor: pointer; color: #514832; display: flex; flex-direction: column; align-items: center; }
+.town-building svg { display: block; width: 100%; height: auto; flex-shrink: 0; overflow: visible; transition: transform .18s ease; filter: drop-shadow(0 6px 2px #645d3e26); }
+.town-building:hover svg,.town-building:focus-visible svg { transform: translateY(-5px); }
+.town-building:focus-visible { outline: 2px dashed #3578b8; outline-offset: 3px; border-radius: 6px; }
+.town-building .building-label { display: inline-block; background: #fffaf0; border: 1px solid #dccba8; padding: 3px 10px; border-radius: 4px; box-shadow: 0 2px 0 #d8c8a5; font: 600 12px/1.4 system-ui,sans-serif; white-space: nowrap; }
+.town-building:hover .building-label { background: #775737; color: #fff; border-color: #775737; }
+.town-car { animation: town-drive 18s linear infinite; transform: translate(var(--from-x),var(--from-y)); }
+.town-car.second-car { animation-duration: 23s; animation-direction: reverse; }
+.sea-wave { animation: town-wave 4s ease-in-out infinite alternate; }
+.sea-wave:nth-child(2) { animation-delay: -2s; }
+.camp-flame { transform-box: fill-box; transform-origin: center bottom; animation: town-fire .9s ease-in-out infinite alternate; }
+.pond-duck { animation: pond-drift 9s ease-in-out infinite alternate; }
+.pond-ripple { animation: pond-water 3.5s ease-in-out infinite alternate; }
+.windmill-sails { transform-origin: 0 0; animation: windmill-turn 26s linear infinite; }
+@keyframes town-drive { to { transform: translate(var(--to-x),var(--to-y)); } }
+@keyframes town-wave { to { transform: translate(-4px,3px); opacity: .45; } }
+@keyframes town-fire { to { transform: scale(.9,1.14); } }
+@keyframes pond-drift { 50% { transform: translate(5px,-2px); } to { transform: translate(10px,1px); } }
+@keyframes pond-water { to { transform: translate(3px,1px); opacity: .35; } }
+@keyframes windmill-turn { from { transform: rotate(35deg); } to { transform: rotate(395deg); } }
+#town-dialog { border: 1px solid #dce3ec; border-radius: 8px; width: min(860px,calc(100% - 40px)); max-height: 88vh; padding: 0; color: #343b44; background: #fff; box-shadow: 0 24px 100px #102f4938; }
+#town-dialog::backdrop { background: #1a32455e; backdrop-filter: blur(5px); }
+.town-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: 0; background: #fff; z-index: 2; padding: 22px 30px 18px; border-bottom: 1px solid #e4eaf0; }
+#town-place { color: #6f879e; font: 500 11px system-ui,sans-serif; text-transform: uppercase; }
+#town-dialog-title { font: bold 26px Georgia,serif; margin: 4px 0 0; color: #294461; }
+#town-close { width: 38px; height: 38px; flex-shrink: 0; border: 1px solid #e2e8ee; border-radius: 4px; background: #f6f8fa; color: #52677d; }
+#town-dialog-content { padding: 24px 30px 32px; float: none; }
+#town-dialog-content[data-module="publications"] { padding-top: 12px; }
+#town-dialog-content[data-module="publications"] .paper-box { padding-top: 8px; padding-bottom: 24px; }
+#town-dialog-content .paper-box:first-child { padding-top: 0; }
+#town-dialog-content > ul { font: 16px/1.65 system-ui,sans-serif; }
+#town-dialog-content > ul em:first-child { font-style: normal; font-weight: 700; }
+.town-person { width: 84px; height: 84px; object-fit: cover; border-radius: 6px; float: left; margin: 0 20px 12px 0; }
+@media(max-width:900px) {
+ .town-nav > button { display: block; width: 42px; height: 40px; }
+ .town-nav .visible-links { display: none; position: absolute; top: 48px; right: 0; width: 205px; padding: 8px 16px; background: #29323d; border: 1px solid #465362; border-radius: 4px; }
+ .town-nav.is-open .visible-links { display: flex; flex-direction: column; gap: 0; }
+ .town-nav .visible-links a { padding: 10px 4px; }
+}
+@media(min-width:925px) {
+ .town-ready #main { max-width: 1300px; grid-template-columns: 220px minmax(0,1fr); gap: 48px; }
+ .town-ready .page__content > p { max-width: 800px; }
+}
+@media(max-width:700px) {
+ .town-header { gap: 10px; margin-top: 28px; }
+ .town-header h2 { font-size: 22px; }
+ .town-coordinate { font-size: 9px; }
+ #town-dialog { width: calc(100% - 20px); max-height: 94vh; }
+ .town-dialog-header { padding: 18px 20px; }
+ #town-dialog-content { padding: 20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .town-building svg { transition: none; }
+ .town-car,.sea-wave,.camp-flame,.pond-duck,.pond-ripple,.windmill-sails { animation: none; }
+ .windmill-sails { transform: rotate(35deg); }
+}

@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="{{ '/assets/css/town.css' | relative_url }}">
+<section id="town" aria-label="Xiaoyun's town">
+  <header class="town-header">
+    <h2>Explore the Town</h2>
+  </header>
+  <div class="town-viewport"><div id="town-map" aria-label="Explore academic modules"></div></div>
+</section>
+<dialog id="town-dialog" aria-labelledby="town-dialog-title">
+  <header class="town-dialog-header"><div><span id="town-place"></span><h2 id="town-dialog-title"></h2></div><button type="button" id="town-close" aria-label="Close" title="Close"><i class="fas fa-times" aria-hidden="true"></i></button></header>
+  <div id="town-dialog-content" class="page__content"></div>
+</dialog>
