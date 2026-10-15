@@ -9,7 +9,8 @@ Behrad Tajalli, Henk Berendsen, **Xiaoyun Xu**<sup title="Corresponding author">
 
 IEEE Symposium on Security and Privacy (S&P), 2027
 
-<p class="paper-links"><a href="https://doi.org/10.5281/zenodo.22757052"><strong>Code</strong></a><a href="https://arxiv.org/abs/2610.19947"><strong>arXiv</strong></a></p>
+[**Code**](https://doi.org/10.5281/zenodo.22757052) <strong><span></span></strong>
+[**arXiv**](https://arxiv.org/abs/2610.19947) <strong><span></span></strong>
 
 <div class="ae-badge"><img src='ae_badge/SP2027/ieeebadges-available.png' alt="AE Available"><img src='ae_badge/SP2027/ieeebadges-functional.png' alt="AE Functional"><img src='ae_badge/SP2027/ieeebadges-reproduced.png' alt="AE Reproduced"></div>
 </div>
@@ -25,7 +26,8 @@ Siyu Zhang, Yelu Gu, **Xiaoyun Xu**<sup title="Corresponding author">*</sup>, Ki
 
 ACM Symposium on User Interface Software and Technology (UIST), 2026
 
-<p class="paper-links"><a href="https://github.com/SiyuZhang-zsy/AdaptaFace"><strong>Code</strong></a><a href="https://arxiv.org/abs/2610.19977"><strong>arXiv</strong></a></p>
+[**Code**](https://github.com/SiyuZhang-zsy/AdaptaFace) <strong><span></span></strong>
+[**arXiv**](https://arxiv.org/abs/2610.19977) <strong><span></span></strong>
 
 </div>
 </div>
