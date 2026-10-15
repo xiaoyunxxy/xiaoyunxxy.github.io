@@ -85,8 +85,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid #2463a6; outline-off
   position: static; display: inline-block; margin: 0 0 10px; padding: 3px 9px;
   color: #315d89; background: #edf3f9; border: 1px solid #d7e2ed; border-radius: 3px; font-size: 11px; font-weight: 650;
 }
-.page__content .ae-badge { gap: 5px; margin-top: 12px; }
-.page__content .ae-badge img { height: 36px; width: auto; box-shadow: none; }
+.page__content .ae-badge { gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.page__content .ae-badge img { height: 64px; width: auto; max-width: 100%; object-fit: contain; box-shadow: none; }
 .page__content > ul { padding-left: 20px; }
 .page__content > ul li::marker { color: #7c8998; }
 @media (min-width: 925px) {

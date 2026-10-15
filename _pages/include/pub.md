@@ -1,5 +1,38 @@
 # Publications 
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">S&amp;P 2027</div><img src='images/quiet_triggers.png' alt="Correlation among backdoor stealthiness footprint metrics" width="75%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[Quiet Triggers, Loud Footprints: A Tri-Space Measurement Study of Backdoor Stealthiness](https://arxiv.org/abs/2610.19947)
+
+Behrad Tajalli, Henk Berendsen, **Xiaoyun Xu**<sup title="Corresponding author">*</sup>, Stjepan Picek
+
+IEEE Symposium on Security and Privacy (S&P), 2027
+
+[**Code**](https://doi.org/10.5281/zenodo.22757052)
+[**arXiv**](https://arxiv.org/abs/2610.19947)
+
+<div class="ae-badge"><img src='ae_badge/SP2027/ieeebadges-available.png' alt="AE Available"><img src='ae_badge/SP2027/ieeebadges-functional.png' alt="AE Functional"><img src='ae_badge/SP2027/ieeebadges-reproduced.png' alt="AE Reproduced"></div>
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">UIST 2026</div><img src='images/adaptaface.png' alt="AdaptaFace system overview" width="75%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[AdaptaFace: Adversarial Assistance for Inclusive Facial Gesture Interaction](https://arxiv.org/abs/2610.19977)
+
+Siyu Zhang, Yelu Gu, **Xiaoyun Xu**<sup title="Corresponding author">*</sup>, Kirsten Cater, Oussama Metatla
+
+ACM Symposium on User Interface Software and Technology (UIST), 2026
+
+[**Code**](https://github.com/SiyuZhang-zsy/AdaptaFace)
+[**arXiv**](https://arxiv.org/abs/2610.19977)
+
+</div>
+</div>
+
+
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">NDSS 2026</div><img src='images/mimir.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
