@@ -27,7 +27,10 @@ layout: compress
       </article>
     </div>
 
+    <footer class="site-footer-mini">&copy; {{ site.time | date: "%Y" }} {{ site.author.name }} &middot; Last updated {{ site.time | date: "%b %Y" }}</footer>
+
     {% include scripts.html %}
+    <script src="{{ '/assets/js/home.js' | relative_url }}"></script>
     {% if page.town %}<script src="{{ '/assets/js/town.js' | relative_url }}"></script>{% endif %}
 
   </body>

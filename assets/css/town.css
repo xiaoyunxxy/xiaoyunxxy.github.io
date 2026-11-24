@@ -69,3 +69,32 @@
  .town-car,.sea-wave,.camp-flame,.pond-duck,.pond-ripple,.windmill-sails { animation: none; }
  .windmill-sails { transform: rotate(35deg); }
 }
+
+/* ---- Theme layer (Nov 2026): minimal academic look, see _sass/_theme.scss ---- */
+#town { background: #f5f7fa; border: 1px solid #e6e8ec; border-radius: 14px; padding: 4px 24px 4px; margin-top: 36px; }
+#town .town-header { flex-direction: column; align-items: flex-start; gap: 2px; margin: 22px 0 0; padding-top: 0; border-top: 0; }
+#town .town-header h2 { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; color: #1d2330; }
+.town-hint { margin: 0; font-size: 13px; color: #667085; }
+.town-viewport { overflow: visible; }
+/* Trim the empty sky above and below the scene */
+#town #town-map { margin-top: -9%; margin-bottom: -9%; }
+/* Hovered building (and its label) rises above its neighbours; town.js sets z-index inline */
+.town-building:hover, .town-building:focus-visible { z-index: 1000 !important; }
+/* (12) label turns blue on hover */
+#town .town-building:hover .building-label, #town .town-building:focus-visible .building-label { background: #1f4e8c; border-color: #1f4e8c; color: #fff; box-shadow: 0 2px 0 #163a6b; }
+/* Dialog */
+#town-dialog { border-color: #e6e8ec; border-radius: 14px; }
+#town-dialog-title { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; color: #1d2330; }
+#town-place { color: #667085; letter-spacing: .06em; }
+#town-dialog-content .paper-box { margin: 0 -12px; }
+/* Desktop nav sits on the light masthead */
+@media (min-width: 901px) { .town-nav .visible-links { background: transparent; border: 0; } }
+@media (max-width: 900px) {
+  .town-nav .visible-links { background: #fff; border-color: #e6e8ec; box-shadow: 0 12px 30px rgba(29,35,48,.1); }
+  .town-nav .visible-links a, .town-nav .visible-links a:visited { color: #3c4452; }
+}
+@media (max-width: 700px) {
+  #town { padding: 0 12px 4px; }
+  #town #town-map { min-width: 0; margin-top: -6%; margin-bottom: -6%; }
+  .town-building .building-label { font-size: 10px; padding: 2px 6px; }
+}
