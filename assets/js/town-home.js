@@ -14,8 +14,33 @@
   const links=[...document.querySelectorAll('.author__urls li a')].map(a=>`<a href="${a.href}" ${a.target?'target="_blank" rel="noopener"':''}>${a.querySelector('i')?.outerHTML||''}<span>${a.textContent.trim()}</span></a>`).join('');
   const tags=document.querySelector('.ri-tags')?.outerHTML||'';
   card.innerHTML=`<div class="hc-top"><img src="${av?.src}" alt=""><div><h1>${name}</h1><p>${bio||''}</p></div></div>
-    <div class="hc-links">${links}</div>${tags}
-    <p class="hc-hint">Explore the town — each building is a section.</p>`;
+    <div class="hc-links">${links}</div>${tags}`;
+  const latest=document.querySelectorAll('h1#news + ul > li:nth-child(-n+3)');
+  if(latest.length){
+    const news=document.createElement('button');
+    news.type='button'; news.className='hc-news';
+    news.innerHTML='<span>News</span><span class="hc-news-list"></span>';
+    for(const item of latest){
+      const row=document.createElement('span');
+      row.className='hc-news-item';
+      const text=item.textContent.trim();
+      const parts=text.match(/^(\d{4}\.\d{2})\s*:?\s*(.+)$/s);
+      if(parts){
+        const date=document.createElement('span');
+        date.className='hc-news-date';
+        date.textContent=parts[1];
+        const headline=document.createElement('span');
+        headline.className='hc-news-headline';
+        headline.textContent=parts[2];
+        row.append(date,headline);
+      } else row.textContent=text;
+      news.lastElementChild.append(row);
+    }
+    news.setAttribute('aria-haspopup','dialog');
+    news.setAttribute('aria-controls',dialog.id);
+    news.addEventListener('click',()=>go('news'));
+    card.append(news);
+  }
   town.append(card);
 
   // ---- View toggle in the masthead
@@ -45,6 +70,13 @@
     map.classList.add('is-zoomed');
   }
   function resetCamera(){
+    if(map.classList.contains('is-zoomed')){
+      // Sample the current translation so an interrupted zoom gets a shorter return.
+      const pose=new DOMMatrixReadOnly(getComputedStyle(map).transform);
+      const travel=Math.hypot(pose.e,pose.f)/Math.max(1,innerWidth);
+      const duration=440+Math.round(200*Math.min(1,Math.max(0,(travel-.15)/.7)));
+      map.style.setProperty('--town-return-time',duration+'ms');
+    }
     map.style.transform='';
     map.classList.remove('is-zoomed');
     map.querySelectorAll('.is-focus').forEach(x=>x.classList.remove('is-focus'));
