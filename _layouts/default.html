@@ -31,7 +31,9 @@ layout: compress
 
     {% include scripts.html %}
     <script src="{{ '/assets/js/home.js' | relative_url }}"></script>
-    {% if page.town %}<script src="{{ '/assets/js/town.js' | relative_url }}"></script>{% endif %}
+    {% if page.town %}<script src="{{ '/assets/js/town.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/town-home.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/town-fun.js' | relative_url }}"></script>{% endif %}
 
   </body>
 </html>

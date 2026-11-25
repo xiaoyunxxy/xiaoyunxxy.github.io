@@ -3,13 +3,13 @@
   const map = document.getElementById('town-map');
   if (!map) return;
   const modules = [
-    {id: 'about-me', title: 'About Me', place: 'The courtyard house', x: 210, y: 110, kind: 'house', scale: .96, lot: [65,28,280,174,'#a9bd70']},
-    {id: 'services', title: 'Services', place: 'The Dutch windmill', x: 635, y: 106, kind: 'windmill', scale: .98, rise: 64, lot: [534,22,231,191,'#a4b968']},
-    {id: 'publications', title: 'Publications', place: 'Huygens Building - Radboud University', x: 303, y: 540, kind: 'huygens', scale: 1.5, lot: [26,337,382,399,'#a1b973']},
-    {id: 'educations', title: 'Education', place: 'Erasmus Building - Radboud University', x: 955, y: 90, kind: 'erasmus', scale: 1.05, rise: 230, lot: [886,20,189,194,'#a6bf73']},
-    {id: 'news', title: 'News', place: 'The shopping arcade', x: 637, y: 441, kind: 'mall', scale: 1.02, lot: [530,340,234,204,'#a6bb74']},
-    {id: 'miscellaneous', title: 'Miscellaneous', place: 'The seaside campsite', x: 987, y: 689, kind: 'camp', scale: .8, lot: [887,651,188,87,'#8fae50']},
-    {id: 'cv', title: 'CV', place: 'The post office', x: 982, y: 452, kind: 'post', scale: .82, lot: [901,365,173,174,'#a5bd71']}
+    {id: 'about-me', title: 'About Me', place: 'The courtyard house', x: 210, y: 110, kind: 'house', scale: .96, lot: [65,28,280,174,'#a9bd70'], label: [551,136]},
+    {id: 'services', title: 'Services', place: 'The Dutch windmill', x: 635, y: 106, kind: 'windmill', scale: .98, rise: 64, lot: [534,22,231,191,'#a4b968'], label: [823,182]},
+    {id: 'publications', title: 'Publications', place: 'Huygens Building - Radboud University', x: 303, y: 540, kind: 'huygens', scale: 1.5, lot: [26,337,382,399,'#a1b973'], label: [397,345]},
+    {id: 'educations', title: 'Education', place: 'Erasmus Building - Radboud University', x: 955, y: 90, kind: 'erasmus', scale: 1.05, rise: 230, lot: [886,20,189,194,'#a6bf73'], label: [1030,113]},
+    {id: 'news', title: 'News', place: 'The shopping arcade', x: 637, y: 441, kind: 'mall', scale: 1.02, lot: [530,340,234,204,'#a6bb74'], label: [610,341]},
+    {id: 'miscellaneous', title: 'Miscellaneous', place: 'The seaside campsite', x: 987, y: 689, kind: 'camp', scale: .8, lot: [887,651,188,87,'#8fae50'], label: [735,552]},
+    {id: 'cv', title: 'CV', place: 'The post office', x: 982, y: 452, kind: 'post', scale: .82, lot: [901,365,173,174,'#a5bd71'], label: [843,461]}
   ];
   const content = document.querySelector('#main .page__content');
   const dialog = document.getElementById('town-dialog');
@@ -70,7 +70,7 @@
     return `<text x="${sx}" y="${sy}" fill="${color}" font-family="Arial,sans-serif" font-weight="700" font-size="${size}" transform="rotate(20 ${sx} ${sy})">${text}</text>`;
   }
   function tree(x,y,scale=1) {
-    return `<g transform="translate(${x} ${y}) scale(${scale})"><ellipse cy="4" rx="17" ry="7" fill="#557138" opacity=".2"/><path d="M0 0v-35" stroke="#8f744b" stroke-width="5"/><ellipse cy="-38" rx="19" ry="29" fill="#88ad49"/><path d="M0-67a19 29 0 0 1 0 58" fill="#70923d"/><ellipse cx="-6" cy="-47" rx="5" ry="9" fill="#a6c563"/></g>`;
+    return `<g class="obj-tree" transform="translate(${x} ${y}) scale(${scale})"><ellipse cy="4" rx="17" ry="7" fill="#557138" opacity=".2"/><path d="M0 0v-35" stroke="#8f744b" stroke-width="5"/><ellipse cy="-38" rx="19" ry="29" fill="#88ad49"/><path d="M0-67a19 29 0 0 1 0 58" fill="#70923d"/><ellipse cx="-6" cy="-47" rx="5" ry="9" fill="#a6c563"/></g>`;
   }
   function building(kind,rise=0) {
     let art = '';
@@ -207,7 +207,7 @@
       art+=face([[-65,35,0],[30,35,0],[-18,35,68]],'#e0c272');
       art+=face([[-47,35,0],[13,35,0],[-18,35,54]],'#355f64');
       art+=face([[-18,35,54],[13,35,0],[-8,35,0]],'#75b4b9');
-      const [fx,fy]=point(66,47,0);
+      const [fx,fy]=point(60,-20,0); // fire pit on the open grass beside the tent
       art+=`<g transform="translate(${fx} ${fy})"><ellipse cy="5" rx="23" ry="10" fill="#c5b082"/><path d="M-15 7L15-3M-14-3L16 7" stroke="#775039" stroke-width="6" stroke-linecap="round"/><g class="camp-flame"><path d="M0 3C-23-7-9-24-6-30-5-17 3-18 2-43 29-12 19 2 0 3" fill="#e77839"/><path d="M0 3C-12-7-4-16 1-27 1-12 15-7 0 3" fill="#ffda70"/></g></g>`;
       art+=tree(30,148,.8);
     }
@@ -224,11 +224,16 @@
     return d;
   }
   let landscape = '';
+  // Diorama base: soil and water edges under the visible sides.
+  landscape += groundFace([[0,905,0],[1100,905,0],[1100,905,-30],[0,905,-30]],'#3e7b8d');
+  landscape += groundFace([[1100,760,0],[1100,905,0],[1100,905,-30],[1100,760,-30]],'#4b8b9d');
+  landscape += groundFace([[1100,0,0],[1100,760,0],[1100,760,-30],[1100,0,-30]],'#a48a67');
+  landscape += groundFace([[1100,0,0],[1100,760,0],[1100,760,-7],[1100,0,-7]],'#7f9a4c');
   landscape += groundFace([[0,760],[1100,760],[1100,905],[0,905]],'#65aabb');
   landscape += groundFace([[0,865],[1100,865],[1100,905],[0,905]],'#4f92a5');
   landscape += `<path d="${shore(809)}L${ground(1100,740)}L${ground(0,740)}Z" fill="#edcf88"/>`;
   landscape += `<g><path class="sea-wave" d="${shore(815)}" fill="none" stroke="#fff9e8" stroke-width="6"/><path class="sea-wave" d="${shore(855)}" fill="none" stroke="#b9e0df" stroke-width="2"/></g>`;
-  landscape += groundFace([[0,0],[1100,0],[1100,760],[0,760]],'#94ae59');
+  landscape += groundFace([[0,0],[1100,0],[1100,760],[0,760]],'#9db466');
   landscape += groundFace([[0,760],[1100,760],[1100,760,-12],[0,760,-12]],'#bcb79c');
   landscape += groundFace([[1100,0],[1100,760],[1100,760,-12],[1100,0,-12]],'#a7a991');
   for(const m of modules) landscape += tile(...m.lot);
@@ -236,10 +241,10 @@
   // The southern street ends at the campus, leaving its larger parcel uninterrupted.
   const crossStreets=[{y:270,start:0},{y:595,start:470}];
   const avenues=[470,820];
-  for(const {y,start} of crossStreets) landscape += tile(start,y-52,1100-start,104,'#c9c6bc');
-  for(const x of avenues) landscape += tile(x-52,0,104,760,'#c9c6bc');
-  for(const {y,start} of crossStreets) landscape += tile(start,y-32,1100-start,64,'#757b7a');
-  for(const x of avenues) landscape += tile(x-32,0,64,760,'#757b7a');
+  for(const {y,start} of crossStreets) landscape += tile(start,y-52,1100-start,104,'#dcd8cd');
+  for(const x of avenues) landscape += tile(x-52,0,104,760,'#dcd8cd');
+  for(const {y,start} of crossStreets) landscape += tile(start,y-32,1100-start,64,'#8a9094');
+  for(const x of avenues) landscape += tile(x-32,0,64,760,'#8a9094');
   for(const {y,start} of crossStreets) landscape += line([start,y],[1100,y],'#f3f1dc',2,'12 10');
   for(const x of avenues) landscape += line([x,0],[x,760],'#f3f1dc',2,'12 10');
   for(const x of avenues) for(const {y} of crossStreets) {
@@ -278,28 +283,56 @@
   landscape += tile(138,770,25,43,'#d08068')+tile(185,779,28,40,'#91bccc');
   const [ux,uy]=ground(173,766);
   landscape += `<g transform="translate(${ux} ${uy})"><path d="M0 0v-31" stroke="#9c784e" stroke-width="3"/><path d="M-25-28Q0-52 25-28Q0-14-25-28" fill="#f0b85e"/><path d="M-25-28Q-10-46 0-43L0-21Z" fill="#f9e9b8"/></g>`;
-  for (const [x,y,s] of [[22,220,.65],[370,180,.72],[535,195,.65],[770,190,.7],[882,210,.75],[1060,223,.6],[14,348,.6],[407,365,.6],[32,700,.8],[406,700,.7],[540,523,.65],[775,516,.6],[883,545,.6],[1078,555,.72],[565,705,.75],[766,705,.7],[430,110,.65]]) {
-    const p=ground(x,y);
-    landscape+=tree(p[0],p[1],s);
+  // Tulip beds: striped rows, Dutch bulb-field style.
+  const TULIP=['#e0433a','#f3c443','#ef8fb2','#f08a3c','#8d5bb0','#f7efe2'];
+  function tulipBed(x,y,w,d,colors,step=8,gap=14) {
+    let bed='';
+    colors.forEach((c,i)=>{
+      const ry=y+6+i*gap; if(ry>y+d-2) return;
+      bed+=line([x,ry],[x+w,ry],'#6f9a45',3);
+      for(let tx=x+3;tx<x+w-1;tx+=step){const p=ground(tx,ry);bed+=`<use href="#tulip" x="${p[0].toFixed(1)}" y="${p[1].toFixed(1)}" color="${c}"/>`;}
+    });
+    return `<g class="tulip-bed" data-bed="${x},${y}">${tile(x-3,y-2,w+6,d+4,'#8a7a55')}${bed}</g>`;
   }
-  for(const [x,y] of [[414,332],[878,331],[414,699],[878,652]]) {
+  // Positions checked by rendering: no building, tree, lamp or bed overlaps another.
+  const TULIP_BEDS=[[585,666,155,62],[714,19,50,38],[993,332,50,36],[51,125,44,32]];
+  for(const [i,[x,y,w,d]] of TULIP_BEDS.entries()) landscape+=tulipBed(x,y,w,d,[0,1,2,3,4,5].map(k=>TULIP[(k+i*2)%TULIP.length]));
+  // Upright things (trees, lamps, tower, cars) are drawn back to front by their ground y,
+  // so a car on a street passes in front of the trees behind it and behind the ones in front.
+  const props=[];
+  for (const [x,y,s] of [[22,220,.65],[385,180,.72],[535,195,.65],[745,345,.7],[877,210,.75],[1055,323,.6],[14,348,.6],[37,680,.8],[521,710,.7],[525,538,.65],[870,476,.6],[883,545,.6],[1098,470,.72],[565,705,.75],[751,665,.7],[430,110,.65]]) {
     const p=ground(x,y);
-    landscape+=`<g transform="translate(${p})"><ellipse cy="3" rx="8" ry="3" fill="#687750" opacity=".3"/><path d="M0 0v-48h10" fill="none" stroke="#5d645c" stroke-width="3"/><circle cx="10" cy="-47" r="5" fill="#ffe5a2"/></g>`;
+    props.push([y,tree(p[0],p[1],s)]);
+  }
+  for(const [x,y] of [[414,177],[893,326],[549,649],[878,652]]) {
+    const p=ground(x,y);
+    props.push([y,`<g class="obj-lamp" transform="translate(${p})"><ellipse cy="3" rx="8" ry="3" fill="#687750" opacity=".3"/><path d="M0 0v-48h10" fill="none" stroke="#5d645c" stroke-width="3"/><circle cx="10" cy="-47" r="5" fill="#ffe5a2"/></g>`]);
   }
   // The lattice tower sits at the far edge of the coastal district.
   const [tx,ty]=ground(1080,25);
-  landscape+=`<g transform="translate(${tx} ${ty})"><ellipse cy="3" rx="23" ry="8" fill="#788052" opacity=".25"/><path d="M-21 0L-5-108H5L21 0M-15-28H15M-10-57H10M-6-85H6M-20-1L14-29-10-57 6-85M20-1L-14-29 10-57-6-85M0-108v-26" fill="none" stroke="#545955" stroke-width="3" stroke-linejoin="round"/><path d="M-10-108H10" stroke="#545955" stroke-width="4"/><circle cy="-137" r="4" fill="#d87553"/></g>`;
+  props.push([25,`<g class="obj-tower" transform="translate(${tx} ${ty})"><ellipse cy="3" rx="23" ry="8" fill="#788052" opacity=".25"/><path d="M-21 0L-5-108H5L21 0M-15-28H15M-10-57H10M-6-85H6M-20-1L14-29-10-57 6-85M20-1L-14-29 10-57-6-85M0-108v-26" fill="none" stroke="#545955" stroke-width="3" stroke-linejoin="round"/><path d="M-10-108H10" stroke="#545955" stroke-width="4"/><circle cy="-137" r="4" fill="#d87553"/></g>`]);
+  // Cars are their own small layers, moved by the graphics card (see moveCars below), so the
+  // large static drawings never have to be redrawn while they drive.
+  const CAR_VB=[-60,-55,120,80];
   function car(color,from,to,extra='') {
     let shape=block(-40,-15,80,30,18,[color,'#a64f42',color]);
     shape+=block(-25,-13,44,26,16,['#d6e7df','#92bdc1','#f4e3bd'],18);
     for(const x of [-23,-6,11]) shape+=windowPane(x,14,21,12,10,'#79a9b2');
     for(const x of [-24,25]) {const p=point(x,17,0);shape+=`<ellipse cx="${p[0]}" cy="${p[1]}" rx="7" ry="8" fill="#4d524d"/><circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#d6d6ba"/>`;}
-    const a=ground(...from),b=ground(...to);
-    return `<g class="town-car ${extra}" style="--from-x:${a[0]}px;--from-y:${a[1]}px;--to-x:${b[0]}px;--to-y:${b[1]}px"><g transform="translate(-130 -146)">${shape}</g></g>`;
+    const a=ground(...from),b=ground(...to),[vx,vy,vw,vh]=CAR_VB;
+    return `<svg class="town-car-sprite ${extra}" viewBox="${CAR_VB.join(' ')}" aria-hidden="true" data-dx="${(b[0]-a[0]).toFixed(2)}" data-dy="${(b[1]-a[1]).toFixed(2)}" style="left:${(a[0]+vx)/12}%;top:${(a[1]+vy)/8}%;width:${vw/12}%;height:${vh/8}%"><g transform="translate(-130 -146)">${shape}</g></svg>`;
   }
-  landscape+=car('#d77357',[60,270],[1060,270]);
-  landscape+=car('#e6c46f',[535,595],[1050,595],'second-car');
-  map.innerHTML = `<svg class="town-ground" viewBox="0 0 1200 800" aria-hidden="true">${landscape}</svg>`;
+  // Upright things are drawn back to front. Buildings are separate layers above the ground, and the
+  // two streets carry cars, so the props are split into three static layers by depth:
+  //   back (north of the north street) · car 1 · middle · [buildings] · car 2 · front (south of the south street)
+  const N_STREET=270, S_STREET=595; let mid='', front='';
+  props.sort((m,n)=>m[0]-n[0]).forEach(([y,svg])=>{ if(y>=S_STREET) front+=svg; else if(y>=N_STREET) mid+=svg; else landscape+=svg; });
+  const VB='viewBox="0 0 1200 800" aria-hidden="true"';
+  map.innerHTML = `<svg class="town-ground" ${VB}><defs><g id="tulip"><path d="M0 0v-6" stroke="#4f7a35" stroke-width="1.3"/><path d="M-2.4-5.5q-.3-3.6 .9-4.6l1.5 1.6 1.5-1.6q1.2 1 .9 4.6z" fill="currentColor"/></g></defs>${landscape}</svg>`
+    + car('#d77357',[60,270],[1060,270])
+    + `<svg class="town-mid" ${VB}>${mid}</svg>`
+    + car('#e6c46f',[535,595],[1050,595],'second-car is-front')
+    + `<svg class="town-front" ${VB}>${front}</svg>`;
   function openModule(m) {
     if (m.id === 'cv') {
       const cvLink = document.querySelector('.masthead a[href$="xxy_CV.pdf"]');
@@ -338,8 +371,9 @@
     button.style.left = (anchor[0]-105*m.scale)/1200*100 + '%';
     button.style.top = (anchor[1]-118*m.scale-headroom*m.scale)/800*100 + '%';
     button.style.zIndex = Math.round(anchor[1]);
-    button.title = m.place;
-    button.innerHTML = building(m.kind,rise) + `<span class="building-label">${m.title}</span>`;
+    button.setAttribute('aria-label', `${m.title} – ${m.place}`);
+    button.dataset.module = m.id;
+    button.innerHTML = building(m.kind,rise);
     button.addEventListener('click', () => openModule(m));
     map.append(button);
   }
@@ -376,6 +410,202 @@
       document.querySelector('h1#'+m.id).scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
     } else openModule(m);
   }, true);
+
+  // ---------- Labels, hover focus, status badges ----------
+  const buttons=[...map.querySelectorAll('.town-building')];
+  const moduleOf=b=>modules.find(m=>m.id===b.dataset.module);
+  const layer=document.createElement('div'); layer.className='town-labels'; map.append(layer);
+  for(const b of buttons){
+    const mod=moduleOf(b), t=mod.title;
+    const l=document.createElement('button'); l.type='button'; l.className='town-label'; l.tabIndex=-1;
+    l.innerHTML=`<span class="tl-title">${t}</span>`;
+    // Label floats just above the building's roof (map units, measured from the art).
+    l.style.left=mod.label[0]/12+'%'; l.style.top=mod.label[1]/8+'%';
+    l.addEventListener('click',()=>b.click());
+    const on=()=>{map.classList.add('has-hot');b.classList.add('is-hot');l.classList.add('is-hot')}, off=()=>{map.classList.remove('has-hot');b.classList.remove('is-hot');l.classList.remove('is-hot')};
+    for(const el of [b,l]){el.addEventListener('mouseenter',on);el.addEventListener('mouseleave',off);}
+    b.addEventListener('focus',on);b.addEventListener('blur',off);
+    layer.append(l);
+  }
+  // ---------- Day/night cycle ----------
+  // Driven from the real sun position over Beijing.
+  //     Preview: ?time=17:10 (today, Beijing) and optionally &date=2026-06-21
+  const town=document.getElementById('town');
+  const RAD=Math.PI/180, LAT=39.9, LON=116.4;
+  function sunPos(ms){
+    const d=(ms-946728000000)/864e5;
+    const g=(357.529+.98560028*d)*RAD, q=280.459+.98564736*d;
+    const L=(q+1.915*Math.sin(g)+.020*Math.sin(2*g))*RAD, ob=(23.439-.00000036*d)*RAD;
+    const ra=Math.atan2(Math.cos(ob)*Math.sin(L),Math.cos(L)), dec=Math.asin(Math.sin(ob)*Math.sin(L));
+    const gmst=((18.697374558+24.06570982441908*d)%24+24)%24;
+    const H=(gmst*15+LON)*RAD-ra, la=LAT*RAD;
+    const alt=Math.asin(Math.sin(la)*Math.sin(dec)+Math.cos(la)*Math.cos(dec)*Math.cos(H));
+    const az=Math.atan2(-Math.sin(H),Math.tan(dec)*Math.cos(la)-Math.sin(la)*Math.cos(H));
+    return {alt:alt/RAD, az:(az/RAD+360)%360, lon:L};
+  }
+  // Moon (low-precision series, good to about a degree): position over Beijing and phase.
+  function moonPos(ms){
+    const d=(ms-946728000000)/864e5, e=23.4397*RAD;
+    const Lm=(218.316+13.176396*d)*RAD, M=(134.963+13.064993*d)*RAD, F=(93.272+13.229350*d)*RAD;
+    const l=Lm+6.289*RAD*Math.sin(M), b=5.128*RAD*Math.sin(F);
+    const ra=Math.atan2(Math.sin(l)*Math.cos(e)-Math.tan(b)*Math.sin(e),Math.cos(l));
+    const dec=Math.asin(Math.sin(b)*Math.cos(e)+Math.cos(b)*Math.sin(e)*Math.sin(l));
+    const gmst=((18.697374558+24.06570982441908*d)%24+24)%24;
+    const H=(gmst*15+LON)*RAD-ra, la=LAT*RAD;
+    const alt=Math.asin(Math.sin(la)*Math.sin(dec)+Math.cos(la)*Math.cos(dec)*Math.cos(H));
+    const az=Math.atan2(-Math.sin(H),Math.tan(dec)*Math.cos(la)-Math.sin(la)*Math.cos(H));
+    return {alt:alt/RAD, az:(az/RAD+360)%360, lon:l};
+  }
+  // Lit shape of the moon disc (radius 20, centred on 0,0) for an elongation from the sun in radians.
+  function moonShape(elong){
+    const el=((elong%(2*Math.PI))+2*Math.PI)%(2*Math.PI), k=(1-Math.cos(el))/2;   // illuminated fraction
+    const rx=(20*Math.abs(1-2*k)).toFixed(2), gib=k>.5?1:0;
+    const path=`M0 -20A20 20 0 0 1 0 20A${rx} 20 0 0 ${gib} 0 -20Z`;               // lit on the right
+    return {k, path, flip: el>Math.PI};                                             // waning: lit on the left
+  }
+  const params=new URLSearchParams(location.search);
+  function now(){
+    const t=params.get('time'); if(!t) return Date.now();
+    const [hh,mm]=t.split(':').map(Number);
+    const ds=params.get('date')||new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date());
+    const [y,m,dd]=ds.split('-').map(Number);
+    return Date.UTC(y,m-1,dd,hh-8,mm||0);
+  }
+  const smooth=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t);};
+
+  // Sky layers, sun, clouds, moon, stars
+  let seed=7; const rnd=()=>((seed=seed*16807%2147483647)/2147483647);
+  const sky=document.createElement('div'); sky.className='town-sky'; sky.setAttribute('aria-hidden','true');
+  let stars=''; for(let i=0;i<34;i++){const x=rnd()*100,y=rnd()*38,r=rnd()<.25?1.6:1;stars+=`<i style="left:${x}%;top:${y}%;width:${r*2}px;height:${r*2}px;animation-delay:${(rnd()*4).toFixed(1)}s"></i>`;}
+  sky.innerHTML=`<div class="sky sky-day"></div><div class="sky sky-dusk"></div><div class="sky sky-night"></div>
+    <div class="town-stars">${stars}</div><span class="town-moon"><svg viewBox="-24 -24 48 48" aria-hidden="true"><defs><clipPath id="moon-lit"><path/></clipPath>
+      <radialGradient id="moon-face" cx="40%" cy="38%"><stop offset="0" stop-color="#fffdf3"/><stop offset=".6" stop-color="#f3efdc"/><stop offset="1" stop-color="#e2dcc2"/></radialGradient></defs>
+      <circle r="20" fill="#dfe6ff" opacity=".07"/>
+      <g class="moon-lit"><g clip-path="url(#moon-lit)"><circle r="20" fill="url(#moon-face)"/><circle cx="-6" cy="4" r="4" fill="#d6ceb0" opacity=".55"/><circle cx="5" cy="-6" r="2.6" fill="#d6ceb0" opacity=".55"/><circle cx="8" cy="8" r="2" fill="#d6ceb0" opacity=".45"/></g></g></svg></span><span class="town-sun"></span>
+    <span class="town-cloud c1"></span><span class="town-cloud c2"></span><span class="town-cloud c3"></span>`;
+  town.prepend(sky);
+
+  // ---------- Performance: moving parts get their own small layers ----------
+  // Anything animated inside a big drawing would force the whole drawing (and its colour filter)
+  // to be redrawn every frame. Each moving part is moved into a small SVG of its own instead.
+  document.body.classList.add('town-ready');            // the map must be laid out to measure it
+  const NS='http://www.w3.org/2000/svg';
+  const toRoot=(el,root)=>root.getScreenCTM().inverse().multiply(el.parentNode.getScreenCTM());
+  const wrap=(el,m)=>{const g=document.createElementNS(NS,'g');g.setAttribute('transform',`matrix(${m.a} ${m.b} ${m.c} ${m.d} ${m.e} ${m.f})`);g.append(el);return g;};
+  // ground parts (waves, ripples, ducks): a small SVG cut to the part's area, positioned in map %
+  function groundSprite(el,root,pad){
+    const rr=root.getBoundingClientRect(), r=el.getBoundingClientRect(), k=1200/rr.width;
+    const x=(r.left-rr.left)*k-pad, y=(r.top-rr.top)*k-pad, w=r.width*k+2*pad, h=r.height*k+2*pad;
+    const m=toRoot(el,root), sp=document.createElementNS(NS,'svg');
+    sp.setAttribute('viewBox',`${x} ${y} ${w} ${h}`); sp.setAttribute('class','town-sprite'); sp.setAttribute('aria-hidden','true');
+    Object.assign(sp.style,{left:x/12+'%',top:y/8+'%',width:w/12+'%',height:h/8+'%'});
+    sp.append(wrap(el,m)); return sp;
+  }
+  const groundSvg=map.querySelector('.town-ground'), after=groundSvg.nextSibling;
+  for(const [sel,pad] of [['.sea-wave',8],['.pond-ripple',6],['.pond-duck',14]])
+    groundSvg.querySelectorAll(sel).forEach(el=>map.insertBefore(groundSprite(el,groundSvg,pad),after));
+  // building parts (windmill sails, camp flame): an overlay with the building's own viewBox
+  for(const b of buttons){
+    const art=b.querySelector('svg');
+    art.querySelectorAll('.windmill-sails,.camp-flame').forEach(el=>{
+      const sp=document.createElementNS(NS,'svg'); sp.setAttribute('viewBox',art.getAttribute('viewBox'));
+      sp.setAttribute('class','town-sprite town-part'); sp.setAttribute('aria-hidden','true');
+      sp.append(wrap(el,toRoot(el,art))); b.append(sp);
+    });
+  }
+  // cars: moved with a transform in pixels, recomputed when the map changes size
+  const carAnims=[];
+  function moveCars(){
+    const k=map.getBoundingClientRect().width/1200/((map.style.transform.match(/scale\(([\d.]+)\)/)||[0,1])[1]);
+    carAnims.splice(0).forEach(a=>a.cancel());
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    map.querySelectorAll('.town-car-sprite').forEach(c=>{
+      const two=c.classList.contains('second-car');
+      const an=c.animate([{transform:'translate(0,0)'},{transform:`translate(${c.dataset.dx*k}px,${c.dataset.dy*k}px)`}],
+        {duration:two?23000:18000,iterations:Infinity,easing:'linear',direction:two?'reverse':'normal'});
+      an.startTime=0; carAnims.push(an);
+    });
+  }
+  moveCars();
+  let lastW=map.offsetWidth; new ResizeObserver(()=>{ if(map.offsetWidth!==lastW){ lastW=map.offsetWidth; moveCars(); } }).observe(map);
+
+  // Light layer: windows and street lamps, each switching on at its own moment
+  const WIN=new Set(['#83b3d1','#658b94','#89b5ce','#7794a0','#668896','#a6b6b6','#d4d4be','#6f909a','#32635b','#628788','#79a9b2']);
+  const lights=[];
+  // Light layer: only the glowing windows and lamps, masked by a copy in which those shapes are
+  // white and every shape drawn after them is black, so walls, roofs, mullions, awnings and trees
+  // in front still hide them. Shapes drawn before the first light can never cover it and are left
+  // out, which keeps the layers small. The layers contain nothing that moves, so they are drawn once.
+  let maskId=0;
+  const SHAPES='polygon,polyline,line,circle,ellipse,path,rect,use,text,image';
+  const lit=(svg)=>{
+    const c=svg.cloneNode(true), mk=svg.cloneNode(true), id='town-light-mask-'+(maskId++);
+    c.setAttribute('class','town-lights');
+    [c,mk].forEach(copy=>copy.querySelectorAll('defs').forEach(e=>e.remove()));
+    const shop=svg.classList.contains('town-art-mall');           // shop windows all light up
+    const cs=[...c.querySelectorAll(SHAPES)], ms=[...mk.querySelectorAll(SHAPES)];
+    let first=-1;
+    cs.forEach((e,i)=>{const m=ms[i], f=(e.getAttribute('fill')||'').toLowerCase();
+      if(f==='#d8eef8'){e.remove();m.remove();return;}             // glass highlight never blocks light
+      let on=false;
+      if(e.tagName==='polygon'&&WIN.has(f)&&(shop||rnd()<.62)){e.setAttribute('fill',rnd()<.5?'#ffd27a':'#ffe3a8');lights.push([e,shop?.15+rnd()*.2:rnd()]);on=true;}
+      else if(f==='#ffe5a2'&&e.tagName==='circle'){e.setAttribute('r','7');m.setAttribute('r','7');lights.push([e,rnd()*.25]);on=true;}
+      if(on){ if(first<0) first=i; e.classList.add('lt');m.setAttribute('fill','#fff');m.removeAttribute('stroke');}
+      else { e.remove();
+        if(first<0) m.remove();
+        else { if(m.getAttribute('fill')!=='none')m.setAttribute('fill','#000'); if(m.hasAttribute('stroke'))m.setAttribute('stroke','#000'); } }
+    });
+    if(first<0) return null;
+    const g=document.createElementNS(NS,'g'); g.setAttribute('mask',`url(#${id})`);
+    while(c.firstChild) g.append(c.firstChild);
+    const defs=document.createElementNS(NS,'defs'), mask=document.createElementNS(NS,'mask');
+    mask.setAttribute('id',id); mask.setAttribute('maskUnits','userSpaceOnUse');
+    for(const [k,v] of [['x',-2000],['y',-2000],['width',5000],['height',5000]]) mask.setAttribute(k,v);
+    while(mk.firstChild) mask.append(mk.firstChild);
+    defs.append(mask); c.append(defs,g);
+    return c;};
+  const addLights=(svg,host)=>{const l=lit(svg); if(l) host.insertBefore(l,svg.nextSibling);};
+  for(const b of buttons) addLights(b.querySelector('svg'),b);
+  for(const cls of ['.town-ground','.town-mid','.town-front']) addLights(map.querySelector(cls),map);
+  // Every animation in the town runs on one clock (pinned to the start of the document timeline).
+  const pin=()=>map.getAnimations({subtree:true}).forEach(an=>an.ready.then(()=>{an.startTime=0;}).catch(()=>{}));
+  requestAnimationFrame(pin); addEventListener('load',pin);
+
+  // Glints on the sea
+  const G=(x,y)=>[480+.63*x-.53*y,140+.26*x+.31*y];
+  let glints='';for(let i=0;i<22;i++){const x=40+rnd()*1020,y=790+rnd()*100,[px,py]=G(x,y),w=6+rnd()*14;glints+=`<path class="glint" d="M${(px-w/2).toFixed(1)} ${py.toFixed(1)}h${w.toFixed(1)}" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;}
+  // (No light wash over the island: a pale overlay made the buildings read as translucent.
+  //  The scene colour filter alone carries the dusk and night tint.)
+  // The glints move, so they get their own layer; the wash above is static and blends once.
+  const gl=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  gl.setAttribute('viewBox','0 0 1200 800');gl.setAttribute('class','town-glints');gl.setAttribute('aria-hidden','true');
+  gl.innerHTML=`<g class="glints-warm">${glints}</g><g class="glints-cool">${glints}</g>`;
+  map.append(gl);
+
+  function update(){
+    const t=now(), {alt:e,az,lon:sunLon}=sunPos(t), moon=moonPos(t), ph=moonShape(moon.lon-sunLon);
+    const kNight=1-smooth(-9,-1,e), kDusk=smooth(-7,-1,e)*(1-smooth(2,10,e)), kSun=smooth(-2,1.5,e), kLight=1-smooth(-6,5,e);
+    const sx=Math.min(96,Math.max(4,92-(az-110)/140*86)), sy=52-Math.min(35,Math.max(-4,e))/35*40;
+    const set=(k,v)=>town.style.setProperty(k,v);
+    set('--k-night',kNight.toFixed(3)); set('--k-dusk',kDusk.toFixed(3)); set('--k-sun',kSun.toFixed(3)); set('--k-light',kLight.toFixed(3));
+    set('--sun-x',sx.toFixed(1)+'%'); set('--sun-y',sy.toFixed(1)+'%');
+    set('--sun-u',((sx-4)/92).toFixed(4));
+    // Same sky mapping as the sun; the moon shows once it is up and the sky is dark enough.
+    const mx=Math.min(94,Math.max(6,92-(moon.az-110)/140*86)), my=48-Math.min(40,Math.max(-4,moon.alt))/40*38;
+    set('--moon-x',mx.toFixed(1)+'%'); set('--moon-y',my.toFixed(1)+'%');
+    set('--moon-u',((mx-6)/88).toFixed(4));
+    set('--k-moon',(kNight*smooth(-1,3,moon.alt)).toFixed(3)); set('--moon-lit',ph.k.toFixed(3));
+    const mp=sky.querySelector('#moon-lit path'); if(mp) mp.setAttribute('d',ph.path);
+    sky.querySelector('.moon-lit')?.setAttribute('transform',ph.flip?'scale(-1 1)':'');
+    town.dataset.moon=`${moon.alt.toFixed(1)}/${moon.az.toFixed(0)}/${(ph.k*100).toFixed(0)}%`;
+    set('--f-b',(1.02-.08*kDusk-.42*kNight).toFixed(3)); set('--f-s',(1.06+.12*kDusk-.56*kNight).toFixed(3));
+    set('--f-sp',(.28*kDusk).toFixed(3)); set('--f-h',(-10*kDusk+18*kNight).toFixed(1)+'deg');
+    town.classList.toggle('is-dark',kNight>.5);
+    for(const [el,th] of lights) el.classList.toggle('on',kLight>th);
+    town.dataset.sun=e.toFixed(1);
+  }
+  update(); setInterval(update,60000);
+
   document.body.classList.add('town-ready');
   const initial = modules.find(m => '#' + m.id === location.hash && m.id !== 'about-me' && m.id !== 'news');
   if (initial) openModule(initial);
