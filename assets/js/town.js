@@ -642,8 +642,8 @@
     const mp=sky.querySelector('#moon-lit path'); if(mp) mp.setAttribute('d',ph.path);
     sky.querySelector('.moon-lit')?.setAttribute('transform',ph.flip?'scale(-1 1)':'');
     town.dataset.moon=`${moon.alt.toFixed(1)}/${moon.az.toFixed(0)}/${(ph.k*100).toFixed(0)}%`;
-    set('--f-b',(1.02-.08*kDusk-.42*kNight).toFixed(3)); set('--f-s',(1.06+.12*kDusk-.56*kNight).toFixed(3));
-    set('--f-sp',(.28*kDusk).toFixed(3)); set('--f-h',(-10*kDusk+18*kNight).toFixed(1)+'deg');
+    set('--f-b',(1.02-.04*kDusk-.42*kNight).toFixed(3)); set('--f-s',(1.06+.04*kDusk-.56*kNight).toFixed(3));
+    set('--f-sp',(.1*kDusk).toFixed(3)); set('--f-h',(-4*kDusk+18*kNight).toFixed(1)+'deg');
     town.classList.toggle('is-dark',kNight>.5);
     town.classList.toggle('no-night-light', kNight === 0);
     town.classList.toggle('full-night', kNight === 1);

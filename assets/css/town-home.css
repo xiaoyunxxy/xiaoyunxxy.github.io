@@ -13,15 +13,15 @@ body.town-home:has(#town.is-dark) .navicon, body.town-home:has(#town.is-dark) .n
 body.town-home #town { position: fixed; inset: 0; margin: 0 !important; padding: 0 !important; border: 0; border-radius: 0; z-index: 10; }
 body.town-home #town > .town-header { display: none; }
 body.town-home .town-viewport { position: absolute !important; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-body.town-home #town #town-map { width: min(84vw, 138vh); min-width: 0; margin: 4vh 0 0 18vw !important; transition: transform .8s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+body.town-home #town #town-map { width: min(80vw, 128vh); min-width: 0; margin: 6vh 0 0 calc(14vw + 40px) !important; transition: transform .8s cubic-bezier(.2,.7,.2,1); will-change: transform; }
 body.town-home #town-map.is-zoomed .town-building:not(.is-focus) > svg:first-child { opacity: .82; }
 body.town-home #town #town-map:not(.is-zoomed) { transition-duration: var(--town-return-time, 440ms); }
 
 /* identity card */
-body.town-home .home-card { display: block; position: absolute; z-index: 30; left: 40px; top: 86px; width: 340px; padding: 22px 22px 18px;
-  background: rgba(255,255,255,.9);
+body.town-home .home-card { display: block; position: absolute; z-index: 30; left: 40px; top: 86px; width: 340px; padding: 20px 18px 16px;
+  background: rgba(255,255,255,.8);
   border: 1px solid rgba(255,255,255,.9); border-radius: 18px; box-shadow: 0 18px 50px rgba(29,35,48,.12); transition: opacity .5s, transform .5s; }
-#town.is-dark .home-card { background: rgba(28,36,62,.86); border-color: rgba(120,140,200,.3); color: #e6ebff; }
+#town.is-dark .home-card { background: rgba(28,36,62,.8); border-color: rgba(120,140,200,.3); color: #e6ebff; }
 .home-card .hc-top { display: flex; gap: 14px; align-items: center; }
 .home-card img { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 0 1px rgba(29,35,48,.08); }
 .home-card h1 { font: 600 24px/1.15 "Source Serif 4",Georgia,serif; margin: 0 0 4px; color: inherit; border: 0; padding: 0; }
@@ -90,4 +90,22 @@ body.town-home .town-sun {
 body.town-home .town-moon {
   --track-u: var(--moon-u, .9);
   top: calc(var(--moon-high, 84px) + var(--moon-travel, 80px) * (1 - var(--moon-height, 0)));
+}
+
+/* Compact card: tighter chips so the card stays narrow and each news item fits on one line */
+body.town-home .home-card .hc-links { gap: 5px; }
+body.town-home .home-card .hc-links a { padding: 5px 8px; font-size: 12px; gap: 5px; }
+body.town-home .home-card .ri-tags { gap: 5px; }
+body.town-home .home-card .ri-tags span { font-size: 11px; padding: 4px 7px; }
+
+/* View toggle: icon + label; icon only on phones so it does not crowd the menu button */
+.view-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.view-toggle i { font-size: 12px; opacity: .75; }
+/* Full-screen town: masthead spans the viewport so the brand lines up with the identity card */
+body.town-home .masthead__inner-wrap { max-width: none; padding-left: 40px; padding-right: 40px; }
+@media (max-width: 700px) {
+  .view-toggle { margin-left: 4px; width: 36px; height: 36px; padding: 0; justify-content: center; }
+  .view-toggle span { display: none; }
+  .view-toggle i { font-size: 14px; opacity: 1; }
+  body.town-home .masthead__inner-wrap { padding-left: 12px; padding-right: 12px; }
 }

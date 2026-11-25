@@ -108,7 +108,8 @@
 .town-sky { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .town-sky .sky { position: absolute; inset: 0; transition: opacity 2s; }
 .sky-day { background: linear-gradient(180deg, #a9d4f7 0%, #cfe7fb 30%, #eef7ff 62%, #ffffff 100%); }
-.sky-dusk { opacity: var(--k-dusk); background: radial-gradient(ellipse 50% 55% at var(--sun-x) var(--sun-y), #ffd08a 0%, rgba(255,190,130,0) 70%), linear-gradient(180deg,#f3a98d 0%,#f8c7a2 38%,#fbe2c8 62%,#f7ece4 100%); }
+/* Dusk stays a gentle warm wash over the day sky so the page palette never turns fully orange. */
+.sky-dusk { opacity: calc(var(--k-dusk) * .65); background: radial-gradient(ellipse 45% 50% at var(--sun-x) var(--sun-y), #ffe2b8 0%, rgba(255,226,184,0) 70%), linear-gradient(180deg,#c9c3e0 0%,#ecd3cf 40%,#f7e8de 66%,#fbf6f2 100%); }
 .sky-night { opacity: var(--k-night); background: radial-gradient(ellipse 60% 70% at 86% 6%, #4d5f92 0%, rgba(77,95,146,0) 70%), linear-gradient(180deg,#26335a 0%,#34426b 60%,#3d4c75 100%); }
 .town-sun { position: absolute; left: var(--sun-x); top: var(--sun-y); width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; opacity: var(--k-sun);
   background: radial-gradient(circle at 50% 45%, #fffef6 0%, #fff4c2 45%, #ffe08a 100%);

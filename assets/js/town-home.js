@@ -15,7 +15,7 @@
   const tags=document.querySelector('.ri-tags')?.outerHTML||'';
   card.innerHTML=`<div class="hc-top"><img src="${av?.src}" alt=""><div><h1>${name}</h1><p>${bio||''}</p></div></div>
     <div class="hc-links">${links}</div>${tags}`;
-  const latest=document.querySelectorAll('h1#news + ul > li:nth-child(-n+3)');
+  const latest=document.querySelectorAll('h1#news + ul > li:nth-child(-n+2)');
   if(latest.length){
     const news=document.createElement('button');
     news.type='button'; news.className='hc-news';
@@ -46,7 +46,9 @@
   // ---- View toggle in the masthead
   const toggle=document.createElement('button'); toggle.type='button'; toggle.className='view-toggle';
   document.querySelector('.masthead__menu').append(toggle);
-  function setMode(m){mode=m; body.classList.toggle('town-home',m==='town'); toggle.textContent=m==='town'?'Text view':'Town view';
+  function setMode(m){mode=m; body.classList.toggle('town-home',m==='town'); const label=m==='town'?'Text view':'Town view';
+    toggle.innerHTML=`<i class="fas fa-${m==='town'?'align-left':'map'}" aria-hidden="true"></i><span>${label}</span>`;
+    toggle.setAttribute('aria-label',label); toggle.title=label;
     try{localStorage.setItem(KEY,m)}catch(e){} if(m!=='town') closePanel(true);}
   toggle.addEventListener('click',()=>setMode(mode==='town'?'text':'town'));
 
