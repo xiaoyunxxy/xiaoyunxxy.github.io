@@ -154,12 +154,18 @@
 .town-lights .lt { opacity: 0; transition: opacity 1.4s; }
 .town-lights .lt.on { opacity: 1; }
 /* glints on the sea */
-.town-glints { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1501; pointer-events: none; will-change: transform; }
+.town-glints { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.night-sea { opacity: var(--k-night, 0); transition: opacity 2s; }
+#town.is-dark .sea-wave { stroke: #91aec6; stroke-width: 1.8; }
 .town-glints .glints-warm { opacity: var(--k-dusk); transition: opacity 2s; }
-.town-glints .glints-cool { opacity: var(--k-night); transition: opacity 2s; }
 .town-glints .glint { stroke-width: 2; stroke-linecap: round; opacity: .15; animation: glint 2.8s ease-in-out infinite alternate; }
-.glints-warm .glint { stroke: #ffd59a; } .glints-cool .glint { stroke: #e8eeff; }
+.glints-warm .glint { stroke: #ffd59a; }
 @keyframes glint { to { opacity: .85; } }
+/* Stop decorative loops when their lighting layer is fully transparent. */
+#town.no-night-light :is(.town-stars i, .firefly, .shooting-star),
+#town.no-dusk-light .glints-warm .glint,
+#town.no-camp-light .campfire :is(.fire-glow, .spark, .note, .night-flame),
+#town.full-night .circus :is(.flag, .ball, .balloon) { animation-play-state: paused; }
 /* header text */
 #town .town-header h2 { color: #1d2330 !important; transition: color 2s; }
 #town .town-hint { transition: color 2s; }

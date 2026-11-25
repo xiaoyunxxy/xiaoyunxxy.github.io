@@ -231,11 +231,20 @@
   landscape += groundFace([[1100,0,0],[1100,760,0],[1100,760,-7],[1100,0,-7]],'#7f9a4c');
   landscape += groundFace([[0,760],[1100,760],[1100,905],[0,905]],'#65aabb');
   landscape += groundFace([[0,865],[1100,865],[1100,905],[0,905]],'#4f92a5');
-  landscape += `<path d="${shore(809)}L${ground(1100,740)}L${ground(0,740)}Z" fill="#edcf88"/>`;
+  landscape += `<g class="night-sea">
+    <defs><linearGradient id="sea-depth" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1" gradientTransform="matrix(693 286 -77 45 ${ground(0,760).join(' ')})">
+      <stop offset="0" stop-color="#639f9e"/><stop offset=".52" stop-color="#397e93"/><stop offset=".8" stop-color="#285e83"/><stop offset="1" stop-color="#214b72"/>
+    </linearGradient></defs>
+    ${tile(0,760,1100,145,'url(#sea-depth)')}
+    ${groundFace([[0,905,0],[1100,905,0],[1100,905,-30],[0,905,-30]],'#193e57')}
+    ${groundFace([[1100,760,0],[1100,905,0],[1100,905,-30],[1100,760,-30]],'#24506a')}
+  </g>`;
+  const landEnd = 760, beachEnd = 809;
+  landscape += groundFace([[1100,landEnd],[1100,beachEnd],[1100,beachEnd,-30],[1100,landEnd,-30]],'#b49969');
+  landscape += `<path d="${shore(beachEnd)}L${ground(1100,landEnd)}L${ground(0,landEnd)}Z" fill="#edcf88"/>`;
   landscape += `<g><path class="sea-wave" d="${shore(815)}" fill="none" stroke="#fff9e8" stroke-width="6"/><path class="sea-wave" d="${shore(855)}" fill="none" stroke="#b9e0df" stroke-width="2"/></g>`;
-  landscape += groundFace([[0,0],[1100,0],[1100,760],[0,760]],'#9db466');
-  landscape += groundFace([[0,760],[1100,760],[1100,760,-12],[0,760,-12]],'#bcb79c');
-  landscape += groundFace([[1100,0],[1100,760],[1100,760,-12],[1100,0,-12]],'#a7a991');
+  landscape += tile(0,0,1100,landEnd,'#9db466');
+  landscape += groundFace([[1100,0],[1100,landEnd],[1100,landEnd,-12],[1100,0,-12]],'#a7a991');
   for(const m of modules) landscape += tile(...m.lot);
   landscape += tile(534,652,228,84,'#a9c379');
   // The southern street ends at the campus, leaving its larger parcel uninterrupted.
@@ -277,9 +286,34 @@
   landscape+=pond+'</g>';
   // Promenade, small jetty, and beach furniture.
   landscape += tile(0,746,1100,14,'#d5c7a8');
-  landscape += tile(460,771,44,100,'#a97c50');
-  for(let y=778;y<872;y+=12) landscape += line([460,y],[504,y],'#d3a773',2);
-  for(const x of [458,505]) for(const y of [786,844]) landscape += line([x,y,-2],[x,y,12],'#795935',4);
+  // Jetty: a raised deck on piles, from the promenade out over the water (kept above the waves, see sprites).
+  {
+    const X0=462,X1=502,Y0=760,Y1=874,Z=7; let j='';
+    for(const y of [792,832,870]) for(const x of [X0+3,X1-3]) j+=line([x,y,-8],[x,y,Z],'#6b4e2e',4);   // piles
+    j+=groundFace([[X0,Y1,Z],[X1,Y1,Z],[X1,Y1,Z-3],[X0,Y1,Z-3]],'#7d5a36');                          // end face
+    j+=groundFace([[X1,Y0,Z],[X1,Y1,Z],[X1,Y1,Z-3],[X1,Y0,Z-3]],'#8a6440');                          // side face
+    j+=groundFace([[X0,Y0,Z],[X1,Y0,Z],[X1,Y1,Z],[X0,Y1,Z]],'#b88a58');                              // deck
+    for(let y=Y0+8;y<Y1;y+=8) j+=line([X0,y,Z],[X1,y,Z],'#94693f',1.2);                             // plank seams
+    // A small rowboat moored alongside, rope tied to the deck.
+    const hull=[[516,824],[522,832],[522,858],[519,866],[513,866],[510,858],[510,832]], HZ=3;
+    hull.forEach((a,i)=>{const b=hull[(i+1)%hull.length], nx=b[1]-a[1], ny=a[0]-b[0];          // outward normal (clockwise outline)
+      if(nx>0||ny>0) j+=groundFace([[...a,HZ],[...b,HZ],[...b,-1],[...a,-1]],nx>0?'#a8402d':'#8f3526');});
+    j+=groundFace(hull.map(([x,y])=>[x,y,HZ]),'#c9533b');                                       // gunwale
+    j+=groundFace([[516,829],[519.5,834],[519.5,857],[517.5,862],[514.5,862],[512.5,857],[512.5,834]].map(([x,y])=>[x,y,1]),'#8a6440'); // inside
+    j+=line([512.5,846,1.6],[519.5,846,1.6],'#c49a66',2.2)+line([512.5,855,1.6],[519.5,855,1.6],'#c49a66',2);  // seats
+    j+=`<path d="M${ground(X1,836,Z-1)}Q${ground(510,832,0)} ${ground(516,826,HZ)}" fill="none" stroke="#efe2c4" stroke-width="1"/>`;  // rope
+    // Someone fishing from the end of the jetty, legs over the edge.
+    const sitAt=ground(480,Y1-2,Z), [sx2,sy2]=sitAt, tip=ground(474,Y1+20,Z+22), bob=ground(475,Y1+23,-1);
+    j+=`<path d="M${tip}L${bob}" stroke="#f4f1e6" stroke-width=".6" opacity=".9"/><circle cx="${bob[0].toFixed(1)}" cy="${bob[1].toFixed(1)}" r="1.4" fill="#e8483b"/>`;
+    const PS=.76;   // Scale around the seat so the hips stay on the deck edge.
+    j+=`<g transform="translate(${sx2.toFixed(1)} ${sy2.toFixed(1)}) scale(${PS})">
+      <path d="M-2.5 0l-2.6 1.5-.8 5-1.5 .4M2 0l-1.8 2.2.3 5-1.4 .5" fill="none" stroke="#3b4256" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="-4" y="-11" width="8" height="11" rx="3.5" fill="#e0a43a"/>
+      <circle cy="-14" r="3.3" fill="#f2cfae"/><path d="M-3.6 -14.5q0-4 3.6-4t3.6 4z" fill="#3f6e9e"/><path d="M0 -15h-5" stroke="#3f6e9e" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M-3 -7l-4 2" stroke="#e0a43a" stroke-width="2" stroke-linecap="round"/></g>`;
+    j+=`<path d="M${(sx2-7*PS).toFixed(1)} ${(sy2-5*PS).toFixed(1)}L${tip}" stroke="#6b4e2e" stroke-width="1.1" stroke-linecap="round"/>`;
+    landscape += `<g class="jetty">${j}</g>`;
+  }
   landscape += tile(138,770,25,43,'#d08068')+tile(185,779,28,40,'#91bccc');
   const [ux,uy]=ground(173,766);
   landscape += `<g transform="translate(${ux} ${uy})"><path d="M0 0v-31" stroke="#9c784e" stroke-width="3"/><path d="M-25-28Q0-52 25-28Q0-14-25-28" fill="#f0b85e"/><path d="M-25-28Q-10-46 0-43L0-21Z" fill="#f9e9b8"/></g>`;
@@ -493,17 +527,22 @@
   const toRoot=(el,root)=>root.getScreenCTM().inverse().multiply(el.parentNode.getScreenCTM());
   const wrap=(el,m)=>{const g=document.createElementNS(NS,'g');g.setAttribute('transform',`matrix(${m.a} ${m.b} ${m.c} ${m.d} ${m.e} ${m.f})`);g.append(el);return g;};
   // ground parts (waves, ripples, ducks): a small SVG cut to the part's area, positioned in map %
-  function groundSprite(el,root,pad){
-    const rr=root.getBoundingClientRect(), r=el.getBoundingClientRect(), k=1200/rr.width;
+  function groundSprite(el,root,rr,pad){
+    const r=el.getBoundingClientRect(), k=1200/rr.width;
     const x=(r.left-rr.left)*k-pad, y=(r.top-rr.top)*k-pad, w=r.width*k+2*pad, h=r.height*k+2*pad;
     const m=toRoot(el,root), sp=document.createElementNS(NS,'svg');
     sp.setAttribute('viewBox',`${x} ${y} ${w} ${h}`); sp.setAttribute('class','town-sprite'); sp.setAttribute('aria-hidden','true');
     Object.assign(sp.style,{left:x/12+'%',top:y/8+'%',width:w/12+'%',height:h/8+'%'});
-    sp.append(wrap(el,m)); return sp;
+    return {el,m,sp};
   }
   const groundSvg=map.querySelector('.town-ground'), after=groundSvg.nextSibling;
-  for(const [sel,pad] of [['.sea-wave',8],['.pond-ripple',6],['.pond-duck',14]])
-    groundSvg.querySelectorAll(sel).forEach(el=>map.insertBefore(groundSprite(el,groundSvg,pad),after));
+  const groundBounds=groundSvg.getBoundingClientRect(), sprites=[];
+  for(const [sel,pad] of [['.sea-wave',8],['.pond-ripple',6],['.pond-duck',14],['.jetty',6]])   // jetty last: above the waves
+    groundSvg.querySelectorAll(sel).forEach(el=>sprites.push(groundSprite(el,groundSvg,groundBounds,pad)));
+  for(const {el,m,sp} of sprites){
+    sp.append(wrap(el,m));
+    map.insertBefore(sp,after);
+  }
   // building parts (windmill sails, camp flame): an overlay with the building's own viewBox
   for(const b of buttons){
     const art=b.querySelector('svg');
@@ -568,7 +607,9 @@
   for(const b of buttons) addLights(b.querySelector('svg'),b);
   for(const cls of ['.town-ground','.town-mid','.town-front']) addLights(map.querySelector(cls),map);
   // Every animation in the town runs on one clock (pinned to the start of the document timeline).
-  const pin=()=>map.getAnimations({subtree:true}).forEach(an=>an.ready.then(()=>{an.startTime=0;}).catch(()=>{}));
+  const pin=()=>map.getAnimations({subtree:true}).forEach(an=>an.ready.then(()=>{
+    if (an.playState === 'running') an.startTime=0;
+  }).catch(()=>{}));
   requestAnimationFrame(pin); addEventListener('load',pin);
 
   // Glints on the sea
@@ -579,21 +620,24 @@
   // The glints move, so they get their own layer; the wash above is static and blends once.
   const gl=document.createElementNS('http://www.w3.org/2000/svg','svg');
   gl.setAttribute('viewBox','0 0 1200 800');gl.setAttribute('class','town-glints');gl.setAttribute('aria-hidden','true');
-  gl.innerHTML=`<g class="glints-warm">${glints}</g><g class="glints-cool">${glints}</g>`;
-  map.append(gl);
+  gl.innerHTML=`<g class="glints-warm">${glints}</g>`;
+  map.insertBefore(gl,map.querySelector('.town-sprite'));
 
   function update(){
     const t=now(), {alt:e,az,lon:sunLon}=sunPos(t), moon=moonPos(t), ph=moonShape(moon.lon-sunLon);
     const kNight=1-smooth(-9,-1,e), kDusk=smooth(-7,-1,e)*(1-smooth(2,10,e)), kSun=smooth(-2,1.5,e), kLight=1-smooth(-6,5,e);
-    const sx=Math.min(96,Math.max(4,92-(az-110)/140*86)), sy=52-Math.min(35,Math.max(-4,e))/35*40;
     const set=(k,v)=>town.style.setProperty(k,v);
     set('--k-night',kNight.toFixed(3)); set('--k-dusk',kDusk.toFixed(3)); set('--k-sun',kSun.toFixed(3)); set('--k-light',kLight.toFixed(3));
-    set('--sun-x',sx.toFixed(1)+'%'); set('--sun-y',sy.toFixed(1)+'%');
-    set('--sun-u',((sx-4)/92).toFixed(4));
-    // Same sky mapping as the sun; the moon shows once it is up and the sky is dark enough.
-    const mx=Math.min(94,Math.max(6,92-(moon.az-110)/140*86)), my=48-Math.min(40,Math.max(-4,moon.alt))/40*38;
-    set('--moon-x',mx.toFixed(1)+'%'); set('--moon-y',my.toFixed(1)+'%');
-    set('--moon-u',((mx-6)/88).toFixed(4));
+    function placeInSky(name, altitude, azimuth) {
+      const east = (1 + Math.cos(altitude * RAD) * Math.sin(azimuth * RAD)) / 2;
+      const height = Math.max(0, altitude) / 90;
+      set('--' + name + '-x', (6 + 88 * east).toFixed(1) + '%');
+      set('--' + name + '-y', (48 - 42 * height).toFixed(1) + '%');
+      set('--' + name + '-height', height);
+      set('--' + name + '-u', east.toFixed(4));
+    }
+    placeInSky('sun', e, az);
+    placeInSky('moon', moon.alt, moon.az);
     set('--k-moon',(kNight*smooth(-1,3,moon.alt)).toFixed(3)); set('--moon-lit',ph.k.toFixed(3));
     const mp=sky.querySelector('#moon-lit path'); if(mp) mp.setAttribute('d',ph.path);
     sky.querySelector('.moon-lit')?.setAttribute('transform',ph.flip?'scale(-1 1)':'');
@@ -601,6 +645,10 @@
     set('--f-b',(1.02-.08*kDusk-.42*kNight).toFixed(3)); set('--f-s',(1.06+.12*kDusk-.56*kNight).toFixed(3));
     set('--f-sp',(.28*kDusk).toFixed(3)); set('--f-h',(-10*kDusk+18*kNight).toFixed(1)+'deg');
     town.classList.toggle('is-dark',kNight>.5);
+    town.classList.toggle('no-night-light', kNight === 0);
+    town.classList.toggle('full-night', kNight === 1);
+    town.classList.toggle('no-dusk-light', kDusk === 0);
+    town.classList.toggle('no-camp-light', kLight === 0);
     for(const [el,th] of lights) el.classList.toggle('on',kLight>th);
     town.dataset.sun=e.toFixed(1);
   }

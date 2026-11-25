@@ -134,7 +134,4 @@
     el.addEventListener('focus', flareOn); el.addEventListener('blur', flareOff);
   }
 
-  // Circus is only open while the sun is up
-  const sync = () => { const n = parseFloat(getComputedStyle(town).getPropertyValue('--k-night')) || 0; svg.classList.toggle('circus-closed', n > .5); };
-  sync(); setInterval(sync, 30000);
 })();

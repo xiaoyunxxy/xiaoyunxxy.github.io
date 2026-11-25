@@ -1,6 +1,6 @@
 # Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">S&amp;P 2027</div><img src='images/quiet_triggers.png' alt="Correlation among backdoor stealthiness footprint metrics" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">S&amp;P 2027</div><img loading="lazy" src='images/quiet_triggers.png' alt="Correlation among backdoor stealthiness footprint metrics" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Quiet Triggers, Loud Footprints: A Tri-Space Measurement Study of Backdoor Stealthiness](https://arxiv.org/abs/2610.19947)
@@ -12,12 +12,12 @@ IEEE Symposium on Security and Privacy (S&P), 2027
 [**Code**](https://doi.org/10.5281/zenodo.22757052) <strong><span></span></strong>
 [**arXiv**](https://arxiv.org/abs/2610.19947) <strong><span></span></strong>
 
-<div class="ae-badge"><img src='ae_badge/SP2027/ieeebadges-available.png' alt="AE Available"><img src='ae_badge/SP2027/ieeebadges-functional.png' alt="AE Functional"><img src='ae_badge/SP2027/ieeebadges-reproduced.png' alt="AE Reproduced"></div>
+<div class="ae-badge"><img loading="lazy" src='ae_badge/SP2027/ieeebadges-available.png' alt="AE Available"><img loading="lazy" src='ae_badge/SP2027/ieeebadges-functional.png' alt="AE Functional"><img loading="lazy" src='ae_badge/SP2027/ieeebadges-reproduced.png' alt="AE Reproduced"></div>
 </div>
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">UIST 2026</div><img src='images/adaptaface.png' alt="AdaptaFace system overview" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">UIST 2026</div><img loading="lazy" src='images/adaptaface.png' alt="AdaptaFace system overview" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [AdaptaFace: Adversarial Assistance for Inclusive Facial Gesture Interaction](https://arxiv.org/abs/2610.19977)
@@ -33,7 +33,7 @@ ACM Symposium on User Interface Software and Technology (UIST), 2026
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NDSS 2026</div><img src='images/mimir.png' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NDSS 2026</div><img loading="lazy" src='images/mimir.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [MIMIR: Masked Image Modeling for Mutual Information-based Adversarial Robustness](https://arxiv.org/abs/2312.04960)
@@ -45,12 +45,12 @@ Network and Distributed System Security (NDSS) Symposium, 2026
 [**Code**](https://github.com/xiaoyunxxy/MIMIR) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
 [**arXiv**](https://arxiv.org/abs/2312.04960) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
 
-<div class="ae-badge"><img src='ae_badge/NDSS/ndssbadges_available.png' alt="AE Available"><img src='ae_badge/NDSS/ndssbadges_functional.png' alt="AE Functional"><img src='ae_badge/NDSS/ndssbadges_reproduced.png' alt="AE Reproduced"></div>
+<div class="ae-badge"><img loading="lazy" src='ae_badge/NDSS/ndssbadges_available.png' alt="AE Available"><img loading="lazy" src='ae_badge/NDSS/ndssbadges_functional.png' alt="AE Functional"><img loading="lazy" src='ae_badge/NDSS/ndssbadges_reproduced.png' alt="AE Reproduced"></div>
 </div>
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS 2025</div><img src='images/weights_change.jpg' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS 2025</div><img loading="lazy" src='images/weights_change.jpg' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Towards Backdoor Stealthiness in Model Parameter Space](https://arxiv.org/abs/2501.05928)
@@ -62,12 +62,12 @@ ACM Conference on Computer and Communications Security (CCS), 2025
 [**Code**](https://github.com/xiaoyunxxy/parameter_backdoor) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
 [**arXiv**](https://arxiv.org/abs/2501.05928) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
 
-<div class="ae-badge"><img src='ae_badge/CCS/icon-small_202009300323.webp' alt="AE Available"><img src='ae_badge/CCS/icon-small_202009300323-1.webp' alt="AE Functional"><img src='ae_badge/CCS/icon-small_202009300324.webp' alt="AE Reproduced"></div>
+<div class="ae-badge"><img loading="lazy" src='ae_badge/CCS/icon-small_202009300323.webp' alt="AE Available"><img loading="lazy" src='ae_badge/CCS/icon-small_202009300323-1.webp' alt="AE Functional"><img loading="lazy" src='ae_badge/CCS/icon-small_202009300324.webp' alt="AE Reproduced"></div>
 </div>
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2024</div><img src='images/badnets_0.2.png' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2024</div><img loading="lazy" src='images/badnets_0.2.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [BAN: Detecting Backdoors Activated by Adversarial Neuron Noise](https://proceedings.neurips.cc/paper_files/paper/2024/hash/cfaccbd9b5e62562779351ebcb140c94-Abstract-Conference.html)
@@ -83,7 +83,7 @@ Advances in Neural Information Processing Systems (NeurIPS), 2024
 
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">DSN 2024</div><img src='images/usb.png' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">DSN 2024</div><img loading="lazy" src='images/usb.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Universal Soldier: Using universal adversarial perturbations for detecting backdoor attacks](https://ieeexplore.ieee.org/abstract/document/10646976?casa_token=Mu4JR6tTcqwAAAAA:fBvq-XKknk57w2PFqU1ssx_YI5rFrSY4699V9ooKl7ylHM8AKCzc2fNzbj-yp1d-c9QI86GFlCPE)
@@ -97,7 +97,7 @@ IEEE/IFIP International Conference on Dependable Systems and Networks Workshops 
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS 2023</div><img src='images/advmae.png' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS 2023</div><img loading="lazy" src='images/advmae.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Poster: Boosting Adversarial Robustness by Adversarial Pre-training](https://dl.acm.org/doi/10.1145/3576915.3624370)
@@ -110,7 +110,7 @@ ACM Conference on Computer and Communications Security (CCS), 2023
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">DSN 2023</div><img src='images/ibrar.png' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">DSN 2023</div><img loading="lazy" src='images/ibrar.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [IB-RAR: Information Bottleneck as Regularizer for Adversarial Robustness](https://ieeexplore.ieee.org/abstract/document/10207164?casa_token=tvmQ2K3SW8AAAAAA:5Pu3CSjEWvQoP_WPZ9ft92zYccVSSk4o5_W3W7H8DGrThKkU2ZjyQ93_LAcod1fhxn5nJdkI8qRF)
@@ -125,7 +125,7 @@ IEEE/IFIP International Conference on Dependable Systems and Networks Workshops 
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS@PPLMP 2020</div><img src='images/informationleakage.png' alt="sym" width="75%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CCS@PPLMP 2020</div><img loading="lazy" src='images/informationleakage.png' alt="sym" width="75%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Information leakage by model weights on federated learning](https://dl.acm.org/doi/abs/10.1145/3411501.3419423?casa_token=KgpcuQHgUuoAAAAA:AHeBGC1SgnZI8oudy3OCaAyFavr_yk43Xf3Bboy1tlCpUe32_iogsZjyToJsXBPnAHJZQ0Yyv2eW)

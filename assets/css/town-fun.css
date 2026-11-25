@@ -5,8 +5,7 @@
 
 /* circus: open while the sun is up */
 .circus { opacity: calc(1 - var(--k-night, 0)); transition: opacity 2s; }
-.circus-closed .circus { pointer-events: none; }
-.circus-closed .tent, .circus-closed .balloon { pointer-events: none; }
+#town.is-dark .circus, #town.is-dark .circus :is(.tent, .balloon) { pointer-events: none; }
 .tent:hover .door { fill: #5a2c44; }
 .flag { transform-origin: left center; animation: flag-wave 1.1s ease-in-out infinite alternate; }
 @keyframes flag-wave { to { transform: skewY(-12deg) scaleX(.88); } }

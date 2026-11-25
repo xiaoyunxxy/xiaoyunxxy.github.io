@@ -65,6 +65,25 @@
   window.addEventListener('popstate',()=>{ const id=location.hash.slice(1); if(id) go(id); else closePanel(true); });
 
   setMode(mode);
+  const windmill = map.querySelector('.town-art-windmill');
+  const tower = map.querySelector('.town-art-erasmus');
+  const sky = town.querySelector('.town-sky');
+  function fitSkyTracks() {
+    if (!body.classList.contains('town-home') || map.classList.contains('is-zoomed')) return;
+    const mobile = matchMedia('(max-width: 700px)').matches;
+    const roof = (mobile ? tower : windmill).getBoundingClientRect().top;
+    const skyTop = sky.getBoundingClientRect().top;
+    const upperEdge = mobile ? card.getBoundingClientRect().bottom : document.querySelector('.masthead').getBoundingClientRect().bottom;
+    for (const name of ['sun', 'moon']) {
+      const clearance = sky.querySelector('.town-' + name).offsetHeight / 2 + 8;
+      const high = upperEdge - skyTop + clearance;
+      town.style.setProperty('--' + name + '-high', high + 'px');
+      town.style.setProperty('--' + name + '-travel', Math.max(0, roof - skyTop - clearance - high) + 'px');
+    }
+  }
+  const skyResize = new ResizeObserver(fitSkyTracks);
+  for (const element of [map, town, card]) skyResize.observe(element);
+  fitSkyTracks();
   // Deep link on load (town.js already opened some modules modally)
   const id=location.hash.slice(1);
   if(id&&body.classList.contains('town-home')){ if(dialog.open) dialog.close(); requestAnimationFrame(()=>go(id)); }

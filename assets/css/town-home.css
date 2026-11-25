@@ -62,6 +62,16 @@ body.town-home #town-dialog .town-dialog-header { padding-top: 28px; }
 /* Full-screen homepage: the identity card covers the top-left of the sky, so the sun and moon
    travel across the sky to the right of it (--sun-u / --moon-u run 0 = west … 1 = east). */
 @media (min-width: 701px) {
-  body.town-home .town-sun { left: calc(30% + var(--sun-u, .5) * 66%); }
-  body.town-home .town-moon { left: calc(30% + var(--moon-u, .9) * 64%); }
+  body.town-home :is(.town-sun, .town-moon) {
+    --track-start: max(420px, 33%);
+    left: calc(var(--track-start) + (76% - var(--track-start)) * var(--track-u));
+  }
+}
+body.town-home .town-sun {
+  --track-u: var(--sun-u, .5);
+  top: calc(var(--sun-high, 84px) + var(--sun-travel, 80px) * (1 - var(--sun-height, 0)));
+}
+body.town-home .town-moon {
+  --track-u: var(--moon-u, .9);
+  top: calc(var(--moon-high, 84px) + var(--moon-travel, 80px) * (1 - var(--moon-height, 0)));
 }
