@@ -15,7 +15,7 @@ body.town-home #town > .town-header { display: none; }
 body.town-home .town-viewport { position: absolute !important; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 body.town-home #town #town-map { width: min(84vw, 138vh); min-width: 0; margin: 4vh 0 0 18vw !important; transition: transform .8s cubic-bezier(.2,.7,.2,1); will-change: transform; }
 body.town-home #town-map.is-zoomed .town-building:not(.is-focus) > svg:first-child { opacity: .82; }
-body.town-home #town #town-map:not(.is-zoomed) { transition-duration: .32s; }
+body.town-home #town #town-map:not(.is-zoomed) { transition-duration: .44s; }
 
 /* identity card */
 body.town-home .home-card { display: block; position: absolute; z-index: 30; left: 40px; top: 86px; width: 340px; padding: 22px 22px 18px;

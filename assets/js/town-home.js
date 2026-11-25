@@ -58,14 +58,17 @@
     if(e.newState==='closed') resetCamera();
   });
   dialog.addEventListener('close',()=>{
-    if(!dialog.open && map.classList.contains('is-zoomed')) resetCamera();
+    if(dialog.open) return;
+    if(map.classList.contains('is-zoomed')) resetCamera();
+    if(body.classList.contains('town-home') && location.hash === '#' + panel.dataset.module)
+      history.pushState(null,'',location.pathname+location.search);
   });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dialog.open&&body.classList.contains('town-home')) closePanel(); });
   // clicking empty sky / ground closes the panel
   town.addEventListener('click',e=>{ if(!dialog.open||!body.classList.contains('town-home')) return;
     if(e.target.closest('.town-building,.town-label,.home-card,#town-dialog')) return; closePanel(); });
 
-  function go(id){ const b=map.querySelector(`.town-building[data-module="${id}"]`); if(b){ panel.dataset.module=''; b.click(); } }
+  function go(id){ map.querySelector(`.town-building[data-module="${id}"]`)?.click(); }
   // Nav links and back/forward
   window.addEventListener('click',e=>{ if(!body.classList.contains('town-home')) return;
     const a=e.target.closest('.masthead a'); if(!a||!a.hash) return;
