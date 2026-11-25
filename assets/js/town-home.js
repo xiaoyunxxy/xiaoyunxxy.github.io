@@ -44,13 +44,22 @@
     map.querySelectorAll('.town-building').forEach(x=>x.classList.toggle('is-focus',x===b));
     map.classList.add('is-zoomed');
   }
-  function closePanel(silent){ if(dialog.open) dialog.close(); map.style.transform=''; map.classList.remove('is-zoomed');
+  function resetCamera(){
+    map.style.transform='';
+    map.classList.remove('is-zoomed');
     map.querySelectorAll('.is-focus').forEach(x=>x.classList.remove('is-focus'));
+  }
+  function closePanel(silent){ if(dialog.open) dialog.close();
     if(!silent&&location.hash) history.pushState(null,'',location.pathname+location.search); }
   new MutationObserver(()=>{ if(panel.dataset.module&&dialog.open){ camera(panel.dataset.module);
       if(location.hash!=='#'+panel.dataset.module) history.pushState(null,'','#'+panel.dataset.module);} })
     .observe(panel,{attributes:true,attributeFilter:['data-module']});
-  dialog.addEventListener('close',()=>{ map.style.transform=''; map.classList.remove('is-zoomed'); map.querySelectorAll('.is-focus').forEach(x=>x.classList.remove('is-focus')); });
+  dialog.addEventListener('beforetoggle', e=>{
+    if(e.newState==='closed') resetCamera();
+  });
+  dialog.addEventListener('close',()=>{
+    if(!dialog.open && map.classList.contains('is-zoomed')) resetCamera();
+  });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dialog.open&&body.classList.contains('town-home')) closePanel(); });
   // clicking empty sky / ground closes the panel
   town.addEventListener('click',e=>{ if(!dialog.open||!body.classList.contains('town-home')) return;
